@@ -154,8 +154,7 @@ public class Main {
     }
 
     private static void informarQuantidade(MenuManager manager) {
-        System.out.println("Total de menus e submenus: " + manager.countMenus());
-        System.out.println("Total de submenus: " + manager.countSubmenus());
+        manager.showMenuStatistics();
     }
 
     private static void exibirArvore(MenuManager manager) {

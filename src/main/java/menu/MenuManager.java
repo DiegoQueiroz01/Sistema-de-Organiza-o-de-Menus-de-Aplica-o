@@ -71,6 +71,12 @@ public class MenuManager {
     public int countSubmenus() {
         return root.countTotalSubmenus();
     }
+    
+    public void showMenuStatistics() {
+        System.out.println("Quantidade total de menus: " + countMenus());
+        
+        System.out.println("Quantidade total de submenus: " + countSubmenus());
+    }
 
     public List<MenuItem> searchMenuItems(String name) {
         return findAllByName(name);
