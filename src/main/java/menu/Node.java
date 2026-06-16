@@ -1,4 +1,4 @@
-package br.com.menu;
+package menu;
 
 import java.util.ArrayList;
 import java.util.List;
