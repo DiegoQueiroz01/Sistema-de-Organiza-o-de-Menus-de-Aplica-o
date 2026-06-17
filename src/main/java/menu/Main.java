@@ -120,14 +120,19 @@ public class Main {
     private static void buscarItem(MenuManager manager, Scanner scanner) {
         System.out.print("Nome do item a buscar: ");
         String nome = scanner.nextLine().trim();
-        List<MenuItem> encontrados = manager.searchMenuItems(nome);
-        if (encontrados.isEmpty()) {
-            System.out.println("Nenhum item encontrado.");
+        if (nome.isBlank()) {
+            System.out.println("Busca inválida. O nome não pode estar em branco.");
             return;
         }
-        System.out.println("Itens encontrados:");
-        for (MenuItem item : encontrados) {
-            System.out.println("- " + item.getFullPath());
+        List<MenuItem> encontrados = manager.searchMenuItems(nome);
+        if (encontrados.isEmpty()) {
+            System.out.println("Nenhum item encontrado com o nome: " + nome);
+            return;
+        }
+        System.out.println("\n Itens encontrados (" + encontrados.size() + "):");
+        for (int i = 0; i < encontrados.size(); i++) {
+            MenuItem item = encontrados.get(i);
+            System.out.println((i + 1) + ". " + item.getName() + " [ Localização: " + item.getFullPath() + "]");
         }
     }
 
@@ -135,12 +140,16 @@ public class Main {
         System.out.print("Nome do item: ");
         String nome = scanner.nextLine().trim();
         List<MenuItem> encontrados = manager.searchMenuItems(nome);
-        if (encontrados.isEmpty()) {
-            System.out.println("Item não encontrado.");
+        if (encontrados.isEmpty() || nome.isBlank()) {
+            System.out.println("Item não encontrado ou busca inválida.");
             return;
         }
-        System.out.println("Caminho completo:");
-        System.out.println(encontrados.get(0).getFullPath());
+        if (encontrados.size() == 1) {
+            System.out.println("\n Caminho completo:\n" + encontrados.get(0).getFullPath());
+        } else {
+            System.out.println("\n Múltiplos itens encontrados com esse nome:");
+            encontrados.forEach(item -> System.out.println("- " + item.getFullPath()));
+        }
     }
 
     private static void listarItensFinais(MenuManager manager) {
